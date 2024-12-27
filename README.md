@@ -36,7 +36,7 @@ pip install -r requirements.txt
 ### Data preparation
 1、You can obtain the BioCDQA.json from the BioCDQA dataset folder, which is a dataset containing 1183 question-answer pairs. 
 
-2、You can access the 68,428 biomedical papers within the retrieval space through the all_document.json from the BioCDQA dataset folder, where you can download the full text of each paper and view its metadata, including keywords, publication details, and citation relationships.
+2、You can access the 68,428 biomedical papers within the retrieval space through the all_document.json from the BioCDQA dataset folder, where you can download the full text of each paper and view its metadata, including title, abstract, key_topics, publication details, and urls.
 
 ### Integrated Reasoning-based Retrieval
 
