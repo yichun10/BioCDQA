@@ -49,8 +49,6 @@ We employ Mean Precision, Mean Recall, and Mean F-measure to assess the proporti
 We utilize GPT-4-based evaluators to score answers on a five-point scale, ensuring semantic accuracy, precision, and relevance, particularly for summary-type questions. The implementation can be found in Evaluation/Answer_Accuracy.py.
 ## License
 
-### Code
-The code in this repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+The repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-### Data
-The data in this repository is licensed under the Creative Commons Public Domain Dedication (CC0 1.0 Universal). See the [DATA_LICENSE](DATA_LICENSE) file for details.
+
