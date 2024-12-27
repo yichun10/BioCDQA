@@ -2,20 +2,55 @@
 
 ## Introduction
 Effective knowledge mining synthesizes extensive information into accurate, evidence-based insights, enabling deeper semantic understanding and cross-domain reasoning. Traditional methods often struggle with the complexity of biomedical knowledge, limiting their ability to establish meaningful connections and perform advanced reasoning. While Large Language Models (LLMs) offer significant improvements, they still face challenges in extracting and integrating the vast, diverse, and highly specialized biomedical literature. We present Integrated and Progressive Retrieval-Augmented Reasoning (IP-RAR), a novel LLM-based framework designed to advance biomedical knowledge mining and question answering by integrating sophisticated retrieval and reasoning mechanisms. IP-RAR begins with Integrated Reasoning-based Retrieval, enabling comprehensive exploration of large-scale biomedical literature, followed by Progressive Reasoning-based Generation, which refines relevant contexts to support precise knowledge generation. To evaluate this framework, we introduce the Biomedical Cross-Document Question Answering (BioCDQA) dataset, constructed from extensive knowledge graphs spanning thousands of biomedical publications. Compared to existing datasets, BioCDQA emphasizes multi-hop reasoning and latent knowledge discovery. Experimental results show that IP-RAR significantly outperforms previous methods on BioCDQA and other biomedical question answering benchmarks, achieving superior retrieval performance and knowledge question-answering accuracy. By combining advanced retrieval techniques with progressive reasoning, our work significantly advances biomedical knowledge mining. The IP-RAR framework addresses key challenges by enabling LLMs to extract, synthesize, and reason over complex biomedical insights. This approach not only reveals hidden patterns in biomedical data and literature, enhancing clinical decision-making, but also accelerates scientific discovery in biomedical research through comprehensive large-scale knowledge integration.
-[application.pdf](https://github.com/user-attachments/files/18258622/application.pdf)
+
+<img width="1123" alt="image" src="https://github.com/user-attachments/assets/3bb6a95b-88ba-491b-9817-7b50835c8f43" />
 Fig. 1. Overview of the proposed framework for biomedical knowledge mining. (A) Biomedical knowledge sources, such as research papers and user queries, are processed through (B) 
 A knowledge mining pipeline that leverages a LLM alongside the Integrated and Progressive Retrieval-Augmented Reasoning approach, designed to generate knowledge graph and precise answers. (C) The outputs enable diverse applications, including drug synergy/antagonism, drug repurposing, precision medicine, bottleneck analysis, research planning, and knowledge transfer.
+
 ## Framework of IP-RAR
+
 ![ourrag_2](https://github.com/user-attachments/assets/129f67e9-8306-42d5-9fc3-c72a3802075e)
+
 Fig. 2. Framework of Integrated and Progressive Retrieval-Augmented Reasoning. (A) Integrated Reasoning-based Retrieval: The method processes the input question by extracting keywords and generating a virtual answer. Using a multi-level and multi-granularity retrieval strategy, it retrieves relevant text chunks from abstracts and full texts based on the question, keywords, and virtual answer, which are then ranked by an aggregator for relevance and context.
 (B) Progressive Reasoning-based Generation: Explanations or self-reflection are used to filter out irrelevant text chunks and select the most relevant ones. These selected chunks are then used to generate individual answers based on the question. Finally, the question and these answers are integrated to produce a comprehensive, accurate final response.
 
 ## Biomedical Cross-Document Question Answering Dataset
 Our dataset is specifically designed for reasoning-based question answering across multiple documents, consisting of tuples that include the following elements: question, question type, answer, source papers for the answer, and source sentences for the answer. Each tuple contains a natural language question that can be answered using one or more sentences extracted from the answer source papers. The answer source may involve one or more papers, and each answer is composed of several sentences that may originate from a single span or multiple spans across different source papers. The dataset comprises a total of 1,183 question-answer pairs, with a retrieval space of 68,428 papers and over 1.85 million document chunks, providing a rich resource for complex reasoning and retrieval tasks. The construction process is illustrated in Figure 3.
-[dataset_construction-2.pdf](https://github.com/user-attachments/files/18258605/dataset_construction-2.pdf)
-Fig. 13. Dataset Construction Workflow Diagram.
+<img width="1123" alt="image" src="https://github.com/user-attachments/assets/36cc711a-0e59-4f53-a2b9-79d1256a2959" />
+
+Fig. 3. Dataset Construction Workflow Diagram.
 (A) Data Collection and Processing: The process begins by converting research papers from PDF to markdown (MD) format to facilitate content extraction.
 (B) Structured Dataset Generation for Entity-level Knowledge Graph: An LLM is used to extract entities and relationships (Entity1, Relationship, Entity2), which are then standardized to construct an entity-level knowledge graph. This graph supports downstream tasks such as drug repurposing, drug interaction analysis for comorbid conditions, and gene-disease associations.
 (C) Structured Dataset Generation for Document-level Knowledge Graph: Summarization is performed using an LLM to extract key aspects such as methods, datasets, and research directions. The resulting document-level knowledge graph facilitates tasks such as research strategic planning and research paper recommendations.
 (D) Unstructured Dataset Generation for Multiple Documents: Integration of the entity-level and document-level knowledge graphs produces a comprehensive knowledge graph. This integrated graph enables connections across multiple documents and supports downstream tasks such as content-based factual questioning, research bottleneck analysis, knowledge transfer, trend analysis, and hotspot detection.
 
+## Environments Setting
+1、In a conda env with PyTorch / CUDA available clone and download this repository.
+
+2、In the top-level directory run:
+```bash
+pip install -r requirements.txt
+```
+
+## Usage
+### Data preparation
+1、You can obtain the BioCDQA.json from the BioCDQA dataset folder, which is a dataset containing 1183 question-answer pairs. 
+
+2、You can access the 68,428 biomedical papers within the retrieval space through the all_document.json from the BioCDQA dataset folder, where you can download the full text of each paper and view its metadata, including keywords, publication details, and citation relationships.
+
+### Integrated Reasoning-based Retrieval
+
+### Progressive Reasoning-based Generation
+
+### Evaluation
+#### Document Retrieval Performance Evaluation
+We employ Mean Precision, Mean Recall, and Mean F-measure to assess the proportion of relevant documents retrieved and the balance between precision and recall. The implementation can be found in Evaluation/Document_Retrieval.py.
+#### Answer Accuracy Evaluation
+We utilize GPT-4-based evaluators to score answers on a five-point scale, ensuring semantic accuracy, precision, and relevance, particularly for summary-type questions. The implementation can be found in Evaluation/Answer_Accuracy.py.
+## License
+
+### Code
+The code in this repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+### Data
+The data in this repository is licensed under the Creative Commons Public Domain Dedication (CC0 1.0 Universal). See the [DATA_LICENSE](DATA_LICENSE) file for details.
