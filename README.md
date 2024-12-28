@@ -123,6 +123,11 @@ python Aggregator.py
 ```
 
 ### Progressive Reasoning-based Generation
+Use the LLM to perform multi-stage validation on the results obtained from the Aggregator and generate the final answer.
+```
+cd IP-RAR/Progressive_Reasoning-based_Generation
+python Generation.py
+```
 
 ### Evaluation
 #### Document Retrieval Performance Evaluation
