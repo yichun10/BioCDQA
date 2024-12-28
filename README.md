@@ -38,7 +38,89 @@ pip install -r requirements.txt
 
 2、You can access the 68,428 biomedical papers within the retrieval space through the all_document.json from the BioCDQA dataset folder, where you can download the full text of each paper and view its metadata, including title, abstract, key_topics, publication details, and urls.
 
+3、You should download the text and convert it into either Markdown or TXT format. We use [Marker]([link](https://github.com/VikParuchuri/marker.git)) to convert the text into Markdown format. 
+
+4、Split the text into appropriately sized chunks (e.g., complete sentences with 500–1000 tokens per chunk) and save the chunks as all_text_chunks.tsv.
+
+5、The abstract does not need to be downloaded or split. It can be directly obtained from the metadata in all_document.json and converted into all_abstract_chunks.tsv.
+
 ### Integrated Reasoning-based Retrieval
+#### Download Retrieval Model
+We use [Contriever-MSMARCO](https://huggingface.co/facebook/contriever-msmarco) as our retrieval component.
+
+#### Question analysis
+Use the LLM to generate keywords and a virtual answer based on the query.
+```
+cd IP-RAR/Integrated_Reasoning-based_Retrieval
+python question_analysis.py
+```
+
+#### Generate embeddings for your own data
+Generate the embeddings for the full-text.
+```
+cd IP-RAR/Integrated_Reasoning-based_Retrieval/retrieval_lm
+python generate_passage_embeddings.py \
+    --model_name_or_path contriever-msmarco \
+    --output_dir YOUR_OUTPUT_DIR \
+    --passages all_text_chunks.tsv
+```
+
+Similarly, generate the embeddings for the abstract.
+
+
+```
+cd IP-RAR/Integrated_Reasoning-based_Retrieval/retrieval_lm
+python generate_passage_embeddings.py \
+    --model_name_or_path contriever-msmarco \
+    --output_dir YOUR_OUTPUT_DIR \
+    --passages all_abstract_chunks.tsv
+```
+
+#### Multi-Level and Multi-Granularity Retrieval
+
+Perform retrieval on the text based on the query.
+```
+cd IP-RAR/Integrated_Reasoning-based_Retrieval/retrieval_lm
+python passage_retrieval.py \
+    --model_name_or_path contriever-msmarco\
+    --passages all_text_chunks.tsv \
+    --passages_embeddings passages_00_text_ms \
+    --query BioCDQA.json  \
+    --output_dir YOUR_OUTPUT_FILE \
+    --n_docs 20
+```
+Perform retrieval on the abstract based on the query.
+```
+python passage_retrieval.py \
+    --model_name_or_path contriever-msmarco\
+    --passages all_abstract_chunks.tsv \
+    --passages_embeddings passages_00_text_ms \
+    --query BioCDQA.json  \
+    --output_dir YOUR_OUTPUT_FILE \
+    --n_docs 10
+```
+Perform retrieval on the text based on the virtual answer.
+```
+python passage_retrieval.py \
+    --model_name_or_path contriever-msmarco\
+    --passages all_text_chunks.tsv \
+    --passages_embeddings passages_00_text_ms \
+    --query virtual_answer.json  \
+    --output_dir YOUR_OUTPUT_FILE \
+    --n_docs 20
+```
+
+Perform keyword matching based on the text.
+```
+cd IP-RAR/Integrated_Reasoning-based_Retrieval
+python keyword_matching.py
+```
+
+#### Aggregator
+```
+cd IP-RAR/Integrated_Reasoning-based_Retrieval
+python Aggregator.py
+```
 
 ### Progressive Reasoning-based Generation
 
