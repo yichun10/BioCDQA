@@ -38,7 +38,7 @@ pip install -r requirements.txt
 
 2、You can access the 68,428 biomedical papers within the retrieval space through the [all_document.json](https://drive.google.com/file/d/1Q-Va4mfdgJt7x3Y5QiXtoCbtalDbvqZI/view?usp=sharing), where you can download the full text of each paper and view its metadata, including title, abstract, key_topics, publication details, and urls.
 
-3、You should download the text and convert it into either Markdown or TXT format. We use [Marker]((https://github.com/VikParuchuri/marker.git)) to convert the text into Markdown format. 
+3、You should download the text and convert it into either Markdown or TXT format. We use [Marker](https://github.com/VikParuchuri/marker.git) to convert the text into Markdown format. 
 
 4、Split the text into appropriately sized chunks (e.g., complete sentences with 500–1000 tokens per chunk) and save the chunks as all_text_chunks.tsv.
 ```
