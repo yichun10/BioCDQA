@@ -107,7 +107,7 @@ python passage_retrieval.py \
     --passages_embeddings passages_00_text_ms \
     --query virtual_answer.json  \
     --output_dir YOUR_OUTPUT_FILE \
-    --n_docs 20
+    --n_docs 10
 ```
 
 Perform keyword matching based on the text.
