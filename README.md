@@ -94,18 +94,28 @@ Perform retrieval on the abstract based on the query.
 python passage_retrieval.py \
     --model_name_or_path contriever-msmarco\
     --passages all_abstract_chunks.tsv \
-    --passages_embeddings passages_00_text_ms \
+    --passages_embeddings passages_00_abstract_ms \
     --query BioCDQA.json  \
     --output_dir YOUR_OUTPUT_FILE \
     --n_docs 10
 ```
 Perform retrieval on the text based on the virtual answer.
 ```
-python passage_retrieval.py \
+python passage_retrieval_virtual_answer.py \
     --model_name_or_path contriever-msmarco\
     --passages all_text_chunks.tsv \
     --passages_embeddings passages_00_text_ms \
-    --query virtual_answer.json  \
+    --query question_analysis_output.json
+    --output_dir YOUR_OUTPUT_FILE \
+    --n_docs 10
+```
+Perform retrieval on the text based on the virtual answer.
+```
+python passage_retrieval_virtual_answer.py \
+    --model_name_or_path contriever-msmarco\
+    --passages all_abstract_chunks.tsv \
+    --passages_embeddings passages_00_abstract_ms \
+    --query question_analysis_output.json  \
     --output_dir YOUR_OUTPUT_FILE \
     --n_docs 10
 ```
