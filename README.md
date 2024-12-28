@@ -36,9 +36,9 @@ pip install -r requirements.txt
 ### Data preparation
 1、You can obtain the BioCDQA.json from the BioCDQA dataset folder, which is a dataset containing 1183 question-answer pairs. 
 
-2、You can access the 68,428 biomedical papers within the retrieval space through the all_document.json from the BioCDQA dataset folder, where you can download the full text of each paper and view its metadata, including title, abstract, key_topics, publication details, and urls.
+2、You can access the 68,428 biomedical papers within the retrieval space through the [all_document.json](https://drive.google.com/file/d/1Q-Va4mfdgJt7x3Y5QiXtoCbtalDbvqZI/view?usp=sharing), where you can download the full text of each paper and view its metadata, including title, abstract, key_topics, publication details, and urls.
 
-3、You should download the text and convert it into either Markdown or TXT format. We use [Marker]([link](https://github.com/VikParuchuri/marker.git)) to convert the text into Markdown format. 
+3、You should download the text and convert it into either Markdown or TXT format. We use [Marker]((https://github.com/VikParuchuri/marker.git)) to convert the text into Markdown format. 
 
 4、Split the text into appropriately sized chunks (e.g., complete sentences with 500–1000 tokens per chunk) and save the chunks as all_text_chunks.tsv.
 ```
@@ -143,11 +143,16 @@ cd IP-RAR/Progressive_Reasoning-based_Generation
 python Generation.py
 ```
 
+
 ### Evaluation
 #### Document Retrieval Performance Evaluation
 We employ Mean Precision, Mean Recall, and Mean F-measure to assess the proportion of relevant documents retrieved and the balance between precision and recall. The implementation can be found in Evaluation/Document_Retrieval.py.
 #### Answer Accuracy Evaluation
 We utilize GPT-4-based evaluators to score answers on a five-point scale, ensuring semantic accuracy, precision, and relevance, particularly for summary-type questions. The implementation can be found in Evaluation/Answer_Accuracy.py.
+
+## Knowledge Graph
+The knowledge graph can serve as a valuable resource for researchers, facilitating knowledge discovery, identifying trends, and exploring relationships between biomedical entities and research methods. The knowledge graph comprises 94,962 nodes and 290,403 relationships. You can download the [knowledge graph](https://drive.google.com/file/d/1x5alzBbdigoBI9j2ZX64cLU_Uad_xqfl/view?usp=sharing).
+
 ## License
 
 The repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
