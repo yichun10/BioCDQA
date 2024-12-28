@@ -41,7 +41,11 @@ pip install -r requirements.txt
 3、You should download the text and convert it into either Markdown or TXT format. We use [Marker]([link](https://github.com/VikParuchuri/marker.git)) to convert the text into Markdown format. 
 
 4、Split the text into appropriately sized chunks (e.g., complete sentences with 500–1000 tokens per chunk) and save the chunks as all_text_chunks.tsv.
-
+```
+tsv_data['id'].append(idx)
+tsv_data['text'].append(item['content'])
+tsv_data['title'].append(item['pid'])
+```
 5、The abstract does not need to be downloaded or split. It can be directly obtained from the metadata in all_document.json and converted into all_abstract_chunks.tsv.
 
 ### Integrated Reasoning-based Retrieval
