@@ -2,18 +2,9 @@ import re
 import json
 import os
 from tqdm import tqdm
-import openai
+from openai import OpenAI
 
-os.environ["OPENAI_API_TYPE"] = "azure"
-os.environ["OPENAI_API_VERSION"] = ""
-os.environ["OPENAI_API_BASE"] = ""
-os.environ["OPENAI_API_KEY"] =  ""
-
-
-# openai.api_type = "azure"
-# openai.api_version = ""
-# openai.api_base = ""
-# openai.api_key =  ""
+client = OpenAI(api_key="<DeepSeek API Key>", base_url="https://api.deepseek.com")
 
 
 with open('BioCDQA.json', 'r', encoding='utf-8') as f:
@@ -41,23 +32,17 @@ for item in tqdm(data):
     """
 
     try:
-        response = openai.ChatCompletion.create(
-            engine="gpt-4o-mini",
-            response_format={
-                "type": "json_object"
-            },
+        response = client.chat.completions.create(
+            model="deepseek-chat",
             messages=[
                 {"role": "system", "content": system_prompts},
                 {"role": "user", "content": f"\nThe question is: " + f"{question}"}
             ],
-            temperature=0.5,
-            max_tokens=800,
-            top_p=0.95,
-            frequency_penalty=0,
-            presence_penalty=0
+            stream=False
         )
 
-        result = response['choices'][0]['message']['content']
+        result = response.choices[0].message.content
+       
 
         try:
             result_json = json.loads(result)
