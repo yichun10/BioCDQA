@@ -2,19 +2,11 @@ import json
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List, Dict
-import openai
+from openai import OpenAI
 from tqdm import tqdm
 import os
-os.environ["OPENAI_API_TYPE"] = "azure"
-os.environ["OPENAI_API_VERSION"] = ""
-os.environ["OPENAI_API_BASE"] = ""
-os.environ["OPENAI_API_KEY"] =  ""
 
-
-# openai.api_type = "azure"
-# openai.api_version = ""
-# openai.api_base = ""
-# openai.api_key =  ""
+client = OpenAI(api_key="<DeepSeek API Key>", base_url="https://api.deepseek.com")
 
 def load_json(file_path: str) -> List:
     with open(file_path, 'r') as file:
@@ -22,36 +14,28 @@ def load_json(file_path: str) -> List:
 
 def can_answer_question(context: str, question: str) -> bool:
     prompt = f"Context:\n{context}\n\nQuestion: {question}\n\nIf the text excerpt allows the question to be correctly answered as specified, respond with 'yes'. Otherwise, respond 'no'."
-    response = openai.ChatCompletion.create(
-        engine="gpt-4o-mini",
+    response = client.chat.completions.create(
+        model="deepseek-chat",
         messages=[
             {"role": "system", "content": "Evaluate if the context can answer the question."},
             {"role": "user", "content": prompt},
         ],
-        temperature=0.5,
-        max_tokens=300,
-        top_p=0.95,
-        frequency_penalty=0,
-        presence_penalty=0,
+        stream=False
     )
-    result = response['choices'][0]['message']['content'].strip().lower()
+    result = response.choices[0].message.content.lower()
     return result == "yes"
 
 def evaluate_support_level(context: str, question: str, answer: str) -> int:
     prompt = f"Context:\n{context}\n\nQuestion: {question}\n\nAnswer: {answer}\n\nScore the relevance of each text block, question, and answer. The most relevant one is scored 100 points, while those that are completely unrelated or have completely opposite meanings are scored 0 points. Other scores may be deducted at discretion. Just need to output the final score."
-    response = openai.ChatCompletion.create(
-        engine="gpt-4o-mini",
+    response = client.chat.completions.create(
+        model="deepseek-chat",
         messages=[
             {"role": "system", "content": "Rate the support level for the answer."},
             {"role": "user", "content": prompt},
         ],
-        temperature=0.5,
-        max_tokens=300,
-        top_p=0.95,
-        frequency_penalty=0,
-        presence_penalty=0,
+        stream=False
     )
-    content = response['choices'][0]['message']['content'].strip()
+    content = response.choices[0].message.content
 
     match = re.search(r'\d+', content)
     support_score = int(match.group()) if match else 0
@@ -59,35 +43,27 @@ def evaluate_support_level(context: str, question: str, answer: str) -> int:
 
 def generate_answer(context: str, question: str) -> str:
     prompt = f"Context:\n{context}\n\nQuestion: {question}\n\nAnswer:"
-    response = openai.ChatCompletion.create(
-        engine="gpt-4o-mini",
+    response = client.chat.completions.create(
+        model="deepseek-chat",
         messages=[
             {"role": "system", "content": "You need to answer question based on the context."},
             {"role": "user", "content": prompt},
         ],
-        temperature=0.5,
-        max_tokens=300,
-        top_p=0.95,
-        frequency_penalty=0,
-        presence_penalty=0,
+        stream=False
     )
-    return response['choices'][0]['message']['content'].strip()
+    return response.choices[0].message.content
 
 def generate_final_answer(final_answers: str, question: str) -> str:
     prompt = f"Multiple Answers:\n{final_answers}\n\nQuestion: {question}\n\nYou need to integrate multiple answers to respond to the question. Please answer concisely in one or two sentences."
-    response = openai.ChatCompletion.create(
-        engine="gpt-4o-mini",
+    response = client.chat.completions.create(
+        model="deepseek-reasoner",
         messages=[
             {"role": "system", "content": "You need to answer concisely by integrating multiple answers."},
             {"role": "user", "content": prompt},
         ],
-        temperature=0.5,
-        max_tokens=300,
-        top_p=0.95,
-        frequency_penalty=0,
-        presence_penalty=0,
+        stream=False
     )
-    return response['choices'][0]['message']['content'].strip()
+    return response.choices[0].message.content
 
 def multi_stage_selection(score_entry: List[Dict], analysis_entry: Dict) -> Dict:
     question = analysis_entry["question"]
