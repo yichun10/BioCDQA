@@ -12,7 +12,8 @@ A knowledge mining pipeline that leverages a LLM alongside the Integrated and Pr
 
 ## Framework of IP-RAR
 
-<img width="561" alt="image" src="https://github.com/user-attachments/assets/4e3ad67c-dc6e-46e8-83f7-71b0906db958" />
+<img width="1123" alt="image" src="https://github.com/user-attachments/assets/4e3ad67c-dc6e-46e8-83f7-71b0906db958" />
+![Uploading BioCDQA-2-12-4-11-第 24 页.drawio.svg…]()
 
 
 Fig. 2. Framework of Integrated and Progressive Retrieval-Augmented Reasoning. (A) Integrated Reasoning-based Retrieval: Performs pre-retrieval reasoning, extracting keywords and generating a virtual answer. Then, a multi-level, multi-granularity retrieval strategy is used to retrieve relevant text chunks, which are ranked based on relevance. (B) Progressive Reasoning-based Generation: Filters out irrelevant text chunks through explanations or self-reflection, then leverages DeepSeek-R1 for deep-thinking-based reasoning on the valid text chunks, generating a precise final response.
