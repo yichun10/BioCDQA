@@ -1,4 +1,4 @@
-# A Scalable Retrieval-Augmented Reasoning Framework Based on Large Language Models for Knowledge Mining in Biomedical Literature
+# A Retrieval-Augmented Knowledge Mining Method with Deep Thinking LLMs for Biomedical Research and Clinical Support
 
 ## Introduction
 Knowledge graphs and large language models (LLMs) serve as key tools for biomedical knowledge integration and reasoning, facilitating the structured organization of literature and the discovery of deep semantic relationships. However, existing methods still face challenges in knowledge mining and cross-document reasoning: knowledge graph construction is constrained by complex terminology, data heterogeneity, and rapid knowledge evolution, while LLMs exhibit limitations in retrieval and reasoning, making it difficult to efficiently uncover deep cross-document associations and reasoning pathways.
