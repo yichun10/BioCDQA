@@ -159,6 +159,10 @@ The knowledge graph can serve as a valuable resource for researchers, facilitati
 
 ## License
 
-The repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+### Code
+The code in this repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+### Data
+The data in this repository is licensed under the Creative Commons Public Domain Dedication (CC0 1.0 Universal). See the [DATA_LICENSE](DATA_LICENSE) file for details.
 
 
