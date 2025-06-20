@@ -52,6 +52,10 @@ tsv_data['title'].append(item['pid'])
 ```
 5、The abstract does not need to be downloaded or split. It can be directly obtained from the metadata in all_document.json and converted into all_abstract_chunks.tsv.
 
+#### Other Dataset
+BioASQ: The benchmark dataset for biomedical semantic indexing and question answering \url{http://bioasq.org/}
+MASH-QA: A clinical QA dataset with semantic hierarchies \url{[10.5281/zenodo.123456](https://github.com/mingzhu0527/MASHQA.git)}
+
 ### Integrated Reasoning-based Retrieval
 #### Download Retrieval Model
 We use [Contriever-MSMARCO](https://huggingface.co/facebook/contriever-msmarco) as our retrieval component.
