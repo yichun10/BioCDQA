@@ -161,6 +161,9 @@ We utilize GPT-4-based evaluators to score answers on a five-point scale, ensuri
 ## Knowledge Graph
 The knowledge graph can serve as a valuable resource for researchers, facilitating knowledge discovery, identifying trends, and exploring relationships between biomedical entities and research methods. The knowledge graph comprises 94,962 nodes and 290,403 relationships. You can download the [knowledge graph](https://drive.google.com/file/d/1x5alzBbdigoBI9j2ZX64cLU_Uad_xqfl/view?usp=sharing).
 
+
+
+
 ## License
 
 ### Code
@@ -169,4 +172,16 @@ The code in this repository is licensed under the MIT License. See the [LICENSE]
 ### Data
 The data in this repository is licensed under the Creative Commons Public Domain Dedication (CC0 1.0 Universal). See the [DATA_LICENSE](DATA_LICENSE) file for details.
 
+## Citation
+If you use the repository of this project, please cite it.
+```
+@article{feng2025retrieval,
+  title={A Retrieval-Augmented Knowledge Mining Method with Deep Thinking LLMs for Biomedical Research and Clinical Support},
+  author={Feng, Yichun and Wang, Jiawei and He, Ruikun and Zhou, Lu and Li, Yixue},
+  journal={GigaScience},
+  year={2025},
+  publisher={Oxford University Press},
+  doi={10.1093/gigascience/giaf109}
+}
 
+```
