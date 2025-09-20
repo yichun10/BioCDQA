@@ -175,14 +175,14 @@ The data in this repository is licensed under the Creative Commons Public Domain
 ## Citation
 If you use the repository of this project, please cite it.
 ```
-@article{Feng2025retrieval,
-  author = {Feng, Yichun and Wang, Jiawei and He, Ruikun and Zhou, Lu and Li, Yixue},
-  title = {A retrieval-augmented knowledge mining method with deep thinking LLMs for biomedical research and clinical support},
-  journal = {GigaScience},
-  volume = {14},
-  year = {2025},
-  doi = {10.1093/gigascience/giaf109},
-  url = {https://doi.org/10.1093/gigascience/giaf109},
+@article{feng2025retrieval,
+  title={A retrieval-augmented knowledge mining method with deep thinking LLMs for biomedical research and clinical support},
+  author={Feng, Yichun and Wang, Jiawei and He, Ruikun and Zhou, Lu and Li, Yixue},
+  journal={GigaScience},
+  volume={14},
+  pages={giaf109},
+  year={2025},
+  publisher={Oxford University Press}
 }
 
 ```
